@@ -13,7 +13,7 @@ const userRoutes = require('./routes/user');
 
 // CONNECTION TO MONGODB
 
-mongoose.connect('YOUR MONGODB URL', {
+mongoose.connect('ZZZZZZ',
   { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log("MongoDB Connection Error : " + err));
@@ -43,7 +43,6 @@ app.use(bodyParser.json());
 
 // Auth user
 app.use('/api/auth', userRoutes);
-
 
 
 
