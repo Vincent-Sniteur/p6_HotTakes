@@ -1,16 +1,16 @@
-// import bcrypt
+// Import bcrypt for hash password
 const bcrypt = require('bcrypt');
 
-// import model User
+// Import model User
 const User = require('../models/user');
 
-// import jwt
+// Import jwt for auth token generation
 const jwt = require('jsonwebtoken');
 
 
-// Singnup export
+// Singnup export (create user + hash password)
 exports.signup = (req, res, next) => {
-    bcrypt.hash(req.body.password, 10) // 10 = nombre de fois que le mot de passe est hashé
+    bcrypt.hash(req.body.password, 10) // 10 = Number of times the password is hashed
         .then(hash => { // Create new user & hash password
             const user = new User({
                 email: req.body.email,

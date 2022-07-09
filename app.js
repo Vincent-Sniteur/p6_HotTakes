@@ -10,10 +10,12 @@ const bodyParser = require('body-parser');
 
 // ROUTER:
 const userRoutes = require('./routes/user');
+const sauceRoutes = require('./routes/sauce');
+const path = require('path');
 
 // CONNECTION TO MONGODB
 
-mongoose.connect('ZZZZZZ',
+mongoose.connect('xxxxx',
   { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log("MongoDB Connection Error : " + err));
@@ -43,6 +45,12 @@ app.use(bodyParser.json());
 
 // Auth user
 app.use('/api/auth', userRoutes);
+
+// Sauces ( all created )
+app.use('/api/sauces', sauceRoutes);
+
+// Images sauce gestion with multer
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 
 
