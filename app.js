@@ -4,13 +4,16 @@
 const express = require('express');
 // import mongoose from 'mongoose';
 const mongoose = require('mongoose');
+// import bodyParser from 'body-parser';
+const bodyParser = require('body-parser');
 
 
-
+// ROUTER:
+const userRoutes = require('./routes/user');
 
 // CONNECTION TO MONGODB
 
-mongoose.connect('mongodb+srv://Sniteur:vFDBbsQtaxo842O3@snit.04ik4.mongodb.net/?retryWrites=true&w=majority',
+mongoose.connect('YOUR MONGODB URL', {
   { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log("MongoDB Connection Error : " + err));
@@ -33,7 +36,13 @@ app.use((req, res, next) => {
 
 
 
+// MIDDLEWARE:
 
+// Intersection des requêtes qui ont du JSON dans l'objet body
+app.use(bodyParser.json());
+
+// Auth user
+app.use('/api/auth', userRoutes);
 
 
 

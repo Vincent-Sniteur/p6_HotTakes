@@ -6,6 +6,10 @@ API HotTakes en construction
 
 express
 mongoose
+body-parser
+bcrypt
+jwt
+mongoose-unique-validator
 
 ## Dev Dependencies
 
