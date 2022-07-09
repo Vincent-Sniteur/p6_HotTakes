@@ -15,7 +15,7 @@ const path = require('path');
 
 // CONNECTION TO MONGODB
 
-mongoose.connect('xxxxx',
+mongoose.connect('Your MongoDB',
   { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log("MongoDB Connection Error : " + err));

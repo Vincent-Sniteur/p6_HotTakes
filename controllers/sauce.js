@@ -32,7 +32,7 @@ exports.modifySauce = (req, res, next) => {
     Sauce.findOne({_id: req.params.id})
         .then((sauce) => {
             if (sauce.userId.toString() !== req.auth.userId) {
-                res.status(400).json({message: 'Vous n\'avez pas le droit de modifier cet objet !'});
+                res.status(403).json({message: 'unauthorized request'});
             }
             else {
                 Sauce.updateOne({ _id: req.params.id}, { ...sauceObject, _id: req.params.id})
@@ -45,19 +45,12 @@ exports.modifySauce = (req, res, next) => {
 }
 
 
-
-
-
-
-
-
-
 // Export Supprimer un objet only if userId is the same as token
 exports.deleteSauce = (req, res, next) => {
     Sauce.findOne({_id: req.params.id})
         .then((sauce) => {
             if (sauce.userId.toString() !== req.auth.userId) {
-                res.status(400).json({message: 'Vous n\'avez pas le droit de supprimer cet objet !'});
+                res.status(403).json({message: 'unauthorized request'});
             }
             else {
                 const filename = sauce.imageUrl.split('/images/')[1];
