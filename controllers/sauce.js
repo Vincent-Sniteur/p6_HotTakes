@@ -61,7 +61,7 @@ exports.deleteSauce = (req, res, next) => {
                 });
             }
         })
-        .catch((error) => {res.status(404).json({error: error})})
+        .catch((error) => {res.status(404).json({ error })})
 }
 
 
@@ -71,12 +71,65 @@ exports.deleteSauce = (req, res, next) => {
 exports.getOneSauce = (req, res, next) => {
     Sauce.findOne({_id: req.params.id})
       .then((sauce) => {res.status(200).json(sauce)})
-      .catch((error) => {res.status(404).json({error: error})})
+      .catch((error) => {res.status(404).json({ error })})
 }
 
 // Export Récupérer tous les objets
 exports.getAllSauce = (req, res, next) => {
     Sauce.find()
       .then((sauce) => {res.status(200).json(sauce)})
-      .catch((error) => {res.status(400).json({error: error})})
+      .catch((error) => {res.status(400).json({ error })})
+}
+
+
+
+// Export like sauce
+exports.likeSauce = (req, res, next) => {
+    const like = req.body.like
+    const idSauce = req.params.id
+    
+    Sauce.findOne({ _id: idSauce })
+
+    .then (sauce => {
+        // If user already like the sauce
+        const includesId = !sauce.usersLiked.includes(req.body.userId) && !sauce.usersDisliked.includes(req.body.userId)
+
+        // Like the sauce
+        if( like === 1 && includesId ) {
+            // Push userId in usersLiked array & increment likes
+            Sauce.updateOne({_id:idSauce}, {$push: {usersLiked: req.body.userId}, $inc: {likes: +1}})
+
+            .then(() => res.status(200).json({ message: 'Like added'}))
+            .catch(error => res.status(400).json({ error }))
+        }
+
+        // Dislike sauce
+        else if( like === -1 && includesId ) {
+            // Push userId in usersDisliked array & increment dislikes
+            Sauce.updateOne({_id:idSauce}, {$push: {usersDisliked: req.body.userId}, $inc: {dislikes: +1}})
+
+            .then(() => res.status(200).json({ message: 'Dislike added'}))
+            .catch(error => res.status(400).json({ error }))
+        }
+
+        // Delete like already exist
+        else {
+            if(sauce.usersLiked.includes(req.body.userId)) {
+            // Remove userId from usersLiked array & decrement likes
+                Sauce.updateOne({_id:idSauce}, {$pull: {usersLiked: req.body.userId}, $inc: {likes: -1}})
+
+                .then(() => res.status(200).json({ message: 'Like remote'}))
+                .catch(error => res.status(400).json({ error }))
+            }
+        // Delete dislike already exist
+            else if(sauce.usersDisliked.includes(req.body.userId)) {
+            // Remove userId from usersDisliked array & decrement dislikes
+                Sauce.updateOne({_id:idSauce}, {$pull: {usersDisliked: req.body.userId}, $inc: {dislikes: -1}})
+
+                .then(() => res.status(200).json({ message: 'Dislike remote'}))
+                .catch(error => res.status(400).json({ error }))
+            }
+        }
+    })
+    .catch(error => res.status(400).json({ error }))
 }

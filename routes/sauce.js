@@ -26,5 +26,9 @@ router.put('/:id', auth, multer, sauceCtrl.modifySauce);
 // Import fonction supprimer un objet
 router.delete('/:id', auth, multer, sauceCtrl.deleteSauce);
 
+// Import fonction add like to sauce
+router.post('/:id/like', auth, sauceCtrl.likeSauce);
+
+
 
 module.exports = router;

@@ -13,9 +13,9 @@ const userRoutes = require('./routes/user');
 const sauceRoutes = require('./routes/sauce');
 const path = require('path');
 
-// CONNECTION TO MONGODB
+// CONNECTION TO MONGODB / ADD .env FILE
 
-mongoose.connect('Your MongoDB',
+mongoose.connect('xxxx',
   { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log("MongoDB Connection Error : " + err));
@@ -51,13 +51,6 @@ app.use('/api/sauces', sauceRoutes);
 
 // Images sauce gestion with multer
 app.use('/images', express.static(path.join(__dirname, 'images')));
-
-
-
-
-
-
-
 
 
 
