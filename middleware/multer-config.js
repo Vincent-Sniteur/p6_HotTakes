@@ -1,5 +1,5 @@
 // Import multer
-const multer = require('multer');
+const multer = require('multer')
 
 // config mine types
 const MIME_TYPE_MAP = {
@@ -11,14 +11,14 @@ const MIME_TYPE_MAP = {
 // Config multer for file generate unique name
 const storage = multer.diskStorage({
     destination: (req, file, callback) => {
-        callback(null, 'images');
+        callback(null, 'images')
     }
     , filename: (req, file, callback) => {
         const name = file.originalname.split(' ').join('_')
         const extension = MIME_TYPE_MAP[file.mimetype];
-        callback(null, name + Date.now() + '.' + extension);
+        callback(null, name + Date.now() + '.' + extension)
     }
-});
+})
 
 // Export config multer
-module.exports = multer({ storage: storage }).single('image');
+module.exports = multer({ storage: storage }).single('image')

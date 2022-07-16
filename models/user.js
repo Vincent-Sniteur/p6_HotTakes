@@ -1,8 +1,8 @@
 // Import mongoose
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 // Import unique validator 
-const uniqueValidator = require('mongoose-unique-validator');
+const uniqueValidator = require('mongoose-unique-validator')
 
 // Shema user
 const userSchema = new mongoose.Schema({
@@ -11,9 +11,9 @@ const userSchema = new mongoose.Schema({
 });
 
 // Add unique validator to userSchema
-userSchema.plugin(uniqueValidator);
+userSchema.plugin(uniqueValidator)
 
 
 
 // Export user model
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', userSchema)

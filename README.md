@@ -1,14 +1,15 @@
-### EN CONSTRUCTION
+### API HotTakes
 
-API HotTakes en construction
+Start : nodemon server.js
+
 
 ## Requierement
 
 express
 
-mongoose
+dotenv
 
-body-parser
+mongoose
 
 bcrypt
 

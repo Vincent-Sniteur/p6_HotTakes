@@ -1,5 +1,5 @@
 // Import mongoose
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 // Shema sauce
 const sauceSchema = new mongoose.Schema({
@@ -14,7 +14,7 @@ const sauceSchema = new mongoose.Schema({
     dislikes: { type: Number, required: true, default: 0 },
     usersLiked: { type: [String], required: true, default: [] },
     usersDisliked: { type: [String], required: true, default: [] },
-});
+})
 
 // Export sauce model
-module.exports = mongoose.model('Sauce', sauceSchema);
+module.exports = mongoose.model('Sauce', sauceSchema)

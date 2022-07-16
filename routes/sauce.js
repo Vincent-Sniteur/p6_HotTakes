@@ -1,34 +1,40 @@
-const express = require('express');
-const router = express.Router();
+// REQUIEREMENTS:
+// Import express
+const express = require('express')
 
 // Import auth middleware
-const auth = require('../middleware/auth');
+const auth = require('../middleware/auth')
 
 // Import multer middleware config
-const multer = require('../middleware/multer-config');
+const multer = require('../middleware/multer-config')
 
 // Import controller
-const sauceCtrl = require('../controllers/sauce');
-
-
-// Import fonction récupérer tous les objets
-router.get('/', auth, sauceCtrl.getAllSauce);
-
-// Import fonction crée un objet
-router.post('/', auth, multer, sauceCtrl.createSauce);
-
-// Import fonction récupérer 1 seul objet
-router.get('/:id', auth, sauceCtrl.getOneSauce);
-
-// Import fonction modiffier un objet
-router.put('/:id', auth, multer, sauceCtrl.modifySauce);
-
-// Import fonction supprimer un objet
-router.delete('/:id', auth, multer, sauceCtrl.deleteSauce);
-
-// Import fonction add like to sauce
-router.post('/:id/like', auth, sauceCtrl.likeSauce);
+const sauceCtrl = require('../controllers/sauce')
 
 
 
-module.exports = router;
+// ROUTER:
+const router = express.Router()
+
+// Import function retrieve all objects
+router.get('/', auth, sauceCtrl.getAllSauce)
+
+// Import function creates an object
+router.post('/', auth, multer, sauceCtrl.createSauce)
+
+// Import function retrieve 1 single object
+router.get('/:id', auth, sauceCtrl.getOneSauce)
+
+// Import function modify an object
+router.put('/:id', auth, multer, sauceCtrl.modifySauce)
+
+// Import function delete an object
+router.delete('/:id', auth, multer, sauceCtrl.deleteSauce)
+
+// Import function add like & dislike object
+router.post('/:id/like', auth, sauceCtrl.likeSauce)
+
+
+
+// Export router for app.js
+module.exports = router
