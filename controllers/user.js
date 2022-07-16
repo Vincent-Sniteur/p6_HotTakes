@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt')
 // Import model User
 const User = require('../models/user')
 
-// Import jwt for auth token generation
+// Import jwt for auth token generation & verification
 const jwt = require('jsonwebtoken')
 
 
@@ -20,7 +20,7 @@ exports.signup = (req, res, next) => {
                 .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
                 .catch(error => res.status(400).json({ error }))
         })
-        .catch(error => res.status(500).json({ error })) // error server
+        .catch(error => res.status(500).json({ error }))
 }
 
 
@@ -48,8 +48,8 @@ exports.login = (req, res, next) => {
                             { expiresIn: '24h' }) // Create token with userId and expires in 24h
                     })
                 })
-                .catch(error => res.status(500).json({ error })) // error server
+                .catch(error => res.status(500).json({ error }))
         }
     })
-        .catch(error => res.status(500).json({ error })) // error server
+        .catch(error => res.status(500).json({ error }))
 }

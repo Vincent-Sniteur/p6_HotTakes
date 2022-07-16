@@ -19,6 +19,8 @@ mongoose-unique-validator
 
 multer
 
+helmet
+
 ## Dev Dependencies
 
 nodemon

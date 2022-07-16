@@ -1,9 +1,11 @@
 // REQUIEREMENTS:
-// Import express from 'express'
+// Import express
 const express = require('express')
-// Import mongoose from 'mongoose'
+// Import helmet for security headers
+const helmet = require("helmet");
+// Import mongoose for database
 const mongoose = require('mongoose')
-// Import dotenv from 'dotenv'
+// Import dotenv config for database connection security
 require('dotenv').config()
 
 
@@ -28,6 +30,8 @@ mongoose.connect(
 
 // Declare app
 const app = express()
+// Use helmet for security headers
+app.use(helmet())
 
 // CORS : General authorization / All requests
 app.use((req, res, next) => {
@@ -37,9 +41,10 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization')
     // Allow requests with GET, POST, PUT, DELETE...
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS')
+    // Allow preflight requests (OPTIONS for Helmet protection)
+    res.setHeader('Cross-Origin-Resource-Policy', 'same-site')
     next()
-});
-
+})
 
 
 // MIDDLEWARE:

@@ -1,7 +1,7 @@
 // Import mongoose
 const mongoose = require('mongoose')
 
-// Import unique validator 
+// Import unique validator (to check if email is unique)
 const uniqueValidator = require('mongoose-unique-validator')
 
 // Shema user
