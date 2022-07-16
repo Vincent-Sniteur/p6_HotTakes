@@ -32,7 +32,15 @@ To capitalize on its success and generate more buzz, the company wants to create
 
 ## Dev Dependencies
 
-- nodemon 
+- nodemon
+
+## Database Documention
+
+For the connection to the database we use DOTENV.
+
+Just add a .env file in the root of the folder and add a line SECRET_DB="Your DB ID & Password login".
+
+
 
 ## Licence Frontend & Documentation
 
